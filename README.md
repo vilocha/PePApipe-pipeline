@@ -35,15 +35,16 @@ QUALITY CONTROL OF READS
 
 This is the very first step which is necessary to ensure a good quality of the two .FASTQ files provided by the sequencing platform. The quality check of raw reads is carried out with the tool FastQC [4]. As a general rule, the per-base sequence quality (Phred score) should always be ideally over 28, and under any circumstances it should be below 20.
 
-INSTALLATION:
-https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+Installation: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
 Once the quality control step is complete and one is satisfied that the quality of sequences is adequate to continue the processing, the reads are ‘cleaned’ with the tool fastp [5]. This step is necessary to ensure that adapters, low quality reads and duplicate reads are removed off the .FASTQ files. In addition, fast produces a post-trimming quality analysis report. 
 The adapters were included during the sequencing process but are not needed for the bioinformatics analysis. Only reads with a minimum phred quality score of 20 and a minimum length of 15 base pairs are kept after applying fastp, but these parameters can be changed in the code line according to user needs. 
 A further quality control using FastQC [4] can be performed for comparison purposes although this is not necessary because fastp [5] already provides a post-trimming quality report, as mentioned above.
-INSTALLATION:
-https://github.com/OpenGene/fastp 
+
+Installation: https://github.com/OpenGene/fastp 
 
 VIRAL READS CONTENT CHECK
+
 In this step the reads that passed the previous filters (‘clean reads’) are mapped against the virus reference genome in .FASTA format chosen for convenience in each particular case using the software tools BWA-mem2 [6] and Samtools [7]. 
 This step is probably the most important of all steps included in this part of the flow, and of the pipeline for that matter. The viral genome reference used for convenience by the authors of the pipeline was ASFV Georgia 2007/1 (Genbank assembly: GCA_003047755.2).
 The objective of this mapping is two-fold: on the one hand it allows to quantify the amount of reads within the original .FASTQ files actually mapping with an ASFV (and thus to also quantify the amount of reads not mapping with an ASFV), and on the other hand, to create a set of reference-mapped contigs (.BAM file) as a first step in the search of genetic variants (SNPs and indels) in the genome of our virus problem compared to the genome of the virus reference used.
