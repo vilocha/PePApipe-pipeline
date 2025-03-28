@@ -32,7 +32,9 @@ The input or starting point of the pipeline is always the set of raw reads which
 STEPS:
 
 QUALITY CONTROL OF READS
+
 This is the very first step which is necessary to ensure a good quality of the two .FASTQ files provided by the sequencing platform. The quality check of raw reads is carried out with the tool FastQC [4]. As a general rule, the per-base sequence quality (Phred score) should always be ideally over 28, and under any circumstances it should be below 20.
+
 INSTALLATION:
 https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 Once the quality control step is complete and one is satisfied that the quality of sequences is adequate to continue the processing, the reads are ‘cleaned’ with the tool fastp [5]. This step is necessary to ensure that adapters, low quality reads and duplicate reads are removed off the .FASTQ files. In addition, fast produces a post-trimming quality analysis report. 
