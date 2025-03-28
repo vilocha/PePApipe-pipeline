@@ -81,46 +81,60 @@ The programme used for this purpose is called Kraken2 [8] and the procedure cons
 
 Code lines:
 
-For this step, purposely-built BASH scripts have been designed and will be available on https://www.protocols.io/ and https://github.com/.
+For this step, purposely-built BASH scripts have been designed and are downloadable through this webpage.
+
 
 DE NOVO VIRAL ASSEMBLY
+
 This step is mainly performed with the software tool Unicycler [9], and ultimately refined with the programmes RagTag [10] (using Unicycler outputs as inputs) and MeDuSa [11] (using RagTag outputs as inputs). 
 This suite uses several dependency programmes in order to obtain a full viral de novo genome assembly starting from the .FASTQ files containing our already ‘cleaned’ reads, be these the original .FASTQ files or the new set created using Kraken2 [8]. 
 Although Unicycler was originally built for bacteria, ideally combining both short (Illumina) and long reads (Oxford Nanopore Technologies), it performs equally well using only viral genomes short reads. 
 A most positive aspect about this type of assembly is that a viral genome reference is not used at all, thus no bias from this source can be introduced, allowing for a genuine assembly of the putative whole genome of our virus problem. This step is the most important within the de novo assembly part of the flow, but unfortunately it is also the most consuming in terms of time and resources.      
 There are particularities in relation to the three tools used in the de novo assembly. In order to obtain a proper assembly of our virus whole genome it is important to specify that what we are looking for is a linear sequence, in other words, that the expected number of linear (non-circular) sequences in the underlying sequence being assembled is just one, and so these requirements must be included in the code in the Unicycler [9] section.
-INSTALLATION:
-https://github.com/rrwick/Unicycler 
+
+Installation: https://github.com/rrwick/Unicycler 
+
 After the first assembly step with Unicycler is concluded, a correction of the obtained contigs converting these into longer contigs is performed with the RagTag tool [10]. This step is necessary to guide the de novo assembly performed by Unicycler into plausible contigs belonging to the ASFV virus, using for that purpose the chosen viral genome reference in .FASTA format (in our case ASFV Georgia 2007/1; Genbank assembly: GCA_003047755.2). 
 It is important to note that even though a viral reference is used, not a single fragment of it is incorporated into the assembly obtained with Unicycler, so the only activity performed in this step is that of contig correction and scaffolding. RagTag comprises four software tools (correct, scaffold, patch and merge) but only the first two, correct and scaffold, are used in the pipeline.      
-INSTALLATION:
-https://github.com/malonge/RagTag
+
+Installation: https://github.com/malonge/RagTag
+
 After the correction and scaffolding performed by RagTag, a third tool called MeDuSa [11] is incorporated as part of the de novo assembly process. MeDuSa performs a scaffold correction in a similar way to RagTag, but instead of using only one viral reference it uses as many well curated references as we are able to provide. Up to 10 references belonging to ASFV virus Genotype II have been included in this pipeline, which in alphabetical order are: Arm_07_CBM_c2_LR812933.1, ASFV_Georgia_2007_1_FR682468.2.fasta, ASFV_HU_2018_MN715134.1, ASFV_LT14_1490_MK628478.fasta, Belgium_2018_1_LR536725.1, Estonia_2014_LS478113.1, Korea_YC1_2019_ON075797.1, POL_2015_Podlaskie_MH681419.1, Tanzania_Rukwa_2017_1_LR813622.1 and Ulyanovsk_19_WB_5699_MW306192.1  
 The higher the number of references used, the better the result of this step will be. Briefly, the contigs obtained from the previous step are further assembled into larger scaffolds with MeDuSa. If the quality of the original reads is high this step generally results in one final contig, which is the putative consensus sequence of the virus under study. On the contrary, poor quality sequences may result in a large number of contigs, and if the number of contigs exceeds 3-5 it would be advisable to reject those sequences.
-INSTALLATION:
-https://github.com/combogenomics/medusa 
+
+Installation: https://github.com/combogenomics/medusa 
+
 
 QUALITY ASSESSMENT OF THE DE NOVO ASSEMBLY
+
 This is a quality analysis that can be performed over all steps in the de novo assembly loop with the intention of investigating the overall quality of the process. The tool included in the pipeline for this task is Quast (QUality ASsessment Tool) [12] and the outputs are available on different formats: .TXT, .PDF, .TSV, .HTML, etc.
-INSTALLATION:
-https://github.com/ablab/quast 
+
+Installation: https://github.com/ablab/quast 
+
 
 ANNOTATION OF THE CONSENSUS SEQUENCE WITH REFERENCE OF CHOICE
+
 This is not an essential step in the pipeline but rather a complementary analysis that can be carried out. The annotation of the de novo consensus sequence is an important task to identify and tag the different genes which have been assembled together. The best tool released so far for this purpose is a universal tool for general annotation that works with viruses, called GATU (General Annotation Transfer Utility) [13], although many viral genes remain unannotated after its use. Two files are necessary to carry out the annotation: a reference sequence in .GBK format and the problem sequence in .FASTA or .GBK formats. 
 The ASFV poses a problem that may render the use of this tool inappropriate, and that is the high genome variability of these viruses. Because of this, a full manual curation exercise is always necessary to arrange the genes according to references in a left to right terminus direction (5’ end to 3’ end) and to clean off all hypothetical genes whose probabilities of belonging to our virus problem are very low (the so called ‘false predictions’). The output of GATU is on a .TSV format and this can be easily transformed into Excel files.    
-INSTALLATION:
-https://4virology.net/virology-ca-tools/gatu/ 
+
+Installation: https://4virology.net/virology-ca-tools/gatu/ 
+
 
 VISUALIZATION OF MAPPED READS AGAINST VIRUS REFERENCE GENOME OF CHOICE
+
 This is also an optional step that is not an integral part of the pipeline. The software tool most universally used for visualizing genome mappings is IGV (Integrative Genomics Viewer) [14-17]. 
 Two genomes are necessary to feed the tool: a reference genome in .FASTA format and the genome under study, which is always provided as a .BAM file accompanied by its index (.BAI file).   
-INSTALLATION:
-https://igv.org/ 
+
+Installation: https://igv.org/ 
+
 
 SEARCH FOR VIRAL GENOME VARIANTS (VARIANT CALLING)
+
 Several tools are used to reveal genetic variants (SNPs and indels) present in the virus genome under study when compared to a viral reference genome. 
 In general, there are two main types of tools: those that use a Bayesian inference and those that use a deterministic/numerical approach. The tool included in this pipeline is called VarScan 2 [19] and is one of the second type (numerical approach). 
+
 In order to obtain the most plausible record of variants with this tool the following five parameters have been defined with the specified values:
+
 -	Minimum number of reads with change to call a variant: 5
 -	Minimum depth (coverage=number of reads in total supporting that variant): 20
 -	P-value: 0.001
@@ -129,13 +143,15 @@ In order to obtain the most plausible record of variants with this tool the foll
 -	Ploidy: 1 (haploid)
 
 This tool may be complemented with other tools in order to obtain more robust/reliable results. We complemented VarScan 2 with Qiagen CLC Genomics Workbench [20] (https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-clc-genomics-workbench/). 
-INSTALLATION:
-https://varscan.sourceforge.net/ 
+
+Installation: https://varscan.sourceforge.net/ 
+
 
 OVERALL QUALITY ASSESSMENT OF THE ANALYSIS
+
 We performed an overall quality assessment of the analysis using the tool MultiQC [21]. This tool evaluates all inputs and outputs in the working directory and performs a general summary assessment in the same folder where all folders used in the analysis are located.  
-INSTALLATION:
-https://github.com/MultiQC/MultiQC
+
+Installation: https://github.com/MultiQC/MultiQC
 
 
 ## Example Usage
