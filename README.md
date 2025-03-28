@@ -54,7 +54,7 @@ The objective of this mapping is two-fold: on the one hand it allows to quantify
 Installation: https://github.com/bwa-mem2/bwa-mem2; https://www.htslib.org/download/ 
 
 
-QUALITY CHECK OF READS MAPPED TO REFERENCE GENOME
+QUALITY CHECK OF READS MAPPED TO REFERENCE GENOME OF CHOICE
 
 One of the tools most commonly used for this purpose is Qualimap 2 [18]. The rationale behind is to assess the quality of the mapping of trimmed raw reads to virus reference genome which was performed to calculate the amount of viral reads present. The outputs can be verified in .PDF and .HTML formats. 
 
