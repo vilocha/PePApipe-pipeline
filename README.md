@@ -17,7 +17,7 @@ This pipeline, designed and programmed in Python, can be run using basic Linux c
 
 Starting from raw data (paired .FASTQ files) obtained from short-read sequencing platforms (Illumina), ‘PePApipe’ implements in a sequential manner all crucial steps by using 14 software tools adequately built into a single pipeline.
 
-
+PIPELINE DIAGRAM
 ![image](https://github.com/user-attachments/assets/f84b44a6-66a9-473c-9bd6-0ece897f9146)
 
 Figure 1. Overall bioinformatic analysis flow followed with PePApipe (in-house built python pipeline specifically designed for ASF viruses). 
