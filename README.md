@@ -13,6 +13,11 @@ This pipeline has been developed bearing in mind that end-users are mostly labor
 
 
 ## Pipeline Workflow (Diagram)
+This pipeline, designed and programmed in Python, can be run using basic Linux commands to launch a Bash script with a Slurm protocol and can be executed on multi-sample batches. The work is sequentially performed over three main areas of genomic analysis: quality control and pre-processing of raw reads, denovo genome assembly and multiple variant calling (Figure 1). Moreover, it may be run in a locally or remotely by accessing a computing server. A basic knowledge of Linux programming language is necessary both to install the programmes and to run the pipeline.
+
+Starting from raw data (paired .FASTQ files) obtained from short-read sequencing platforms (Illumina), ‘PePApipe’ implements in a sequential manner all crucial steps by using 14 software tools adequately built into a single pipeline.
+
+![image](https://github.com/user-attachments/assets/f84b44a6-66a9-473c-9bd6-0ece897f9146)
 
 
 ## Installation Steps
