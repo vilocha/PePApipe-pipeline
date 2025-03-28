@@ -23,6 +23,9 @@ PIPELINE DIAGRAM
 Figure 1. Overall bioinformatic analysis flow followed with PePApipe (in-house built python pipeline specifically designed for ASF viruses). 
 
 ## Installation Steps
+The following steps must be implemented in the order suggested to successfully install all necessary programmes to be able to run this pipeline. The actual code lines used within the pipeline are shown below along with the installation instructions for the different programmes. These code lines are already built within the pipeline and will be executed at once when the pipeline is run, but they are shown here for information and programming purposes.
+
+According to needs, the different modules in the pipeline can be activated/ deactivated by just uncommenting/ commenting them in the main section of the pipeline script, respectively.
 
 
 ## Example Usage
