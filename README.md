@@ -112,7 +112,7 @@ This is a quality analysis that can be performed over all steps in the de novo a
 Installation: https://github.com/ablab/quast 
 
 
-ANNOTATION OF THE CONSENSUS SEQUENCE WITH REFERENCE OF CHOICE
+ANNOTATION OF THE CONSENSUS SEQUENCE WITH REFERENCE GENOME OF CHOICE
 
 This is not an essential step in the pipeline but rather a complementary analysis that can be carried out. The annotation of the de novo consensus sequence is an important task to identify and tag the different genes which have been assembled together. The best tool released so far for this purpose is a universal tool for general annotation that works with viruses, called GATU (General Annotation Transfer Utility) [13], although many viral genes remain unannotated after its use. Two files are necessary to carry out the annotation: a reference sequence in .GBK format and the problem sequence in .FASTA or .GBK formats. 
 The ASFV poses a problem that may render the use of this tool inappropriate, and that is the high genome variability of these viruses. Because of this, a full manual curation exercise is always necessary to arrange the genes according to references in a left to right terminus direction (5’ end to 3’ end) and to clean off all hypothetical genes whose probabilities of belonging to our virus problem are very low (the so called ‘false predictions’). The output of GATU is on a .TSV format and this can be easily transformed into Excel files.    
