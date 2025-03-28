@@ -49,6 +49,11 @@ INSTALLATION:
 https://github.com/bwa-mem2/bwa-mem2
 https://www.htslib.org/download/ 
 
+QUALITY CHECK OF READS MAPPED TO REFERENCE GENOME
+One of the tools most commonly used for this purpose is Qualimap 2 [18]. The rationale behind is to assess the quality of the mapping of trimmed raw reads to virus reference genome which was performed to calculate the amount of viral reads present. The outputs can be verified in .PDF and .HTML formats. 
+INSTALLATION:
+http://qualimap.conesalab.org/ 
+
 QUANTITATIVE ASSESSMENT OF VIRAL READS (THEORETICAL CUT-OFF POINT: 75%)
 It is important to carry out all bioinformatics analyses only on viral reads free of contamination with reads from other origins (host, environment or handling personnel) or, if this is not possible, at least on a as high as possible number of viral reads. This is because the results we may obtain if the analyses are performed on a high number of non-viral reads may be spurious and therefore not representative of the virus we are trying to characterize.
 This is a point in the pipeline where a decision has to be made as to the quality level we want to apply to our analysis in relation to the available reads (Figure 1). A theoretical threshold (cut-off point) of 75% has been established by the authors in order to decide whether to continue the analyses with the original .FASTQ files already filtered (‘clean reads’) or whether to carry out yet another filtering step to get rid of non-viral reads. If the latter is decided, a new set of .FASTQ files must be created by mapping the ‘clean reads’ against all published reliable reads belonging to the Superkingdom Viruses (NCBI: txid10239).
@@ -98,11 +103,6 @@ This is also an optional step that is not an integral part of the pipeline. The 
 Two genomes are necessary to feed the tool: a reference genome in .FASTA format and the genome under study, which is always provided as a .BAM file accompanied by its index (.BAI file).   
 INSTALLATION:
 https://igv.org/ 
-
-QUALITY CHECK OF READS MAPPED TO REFERENCE GENOME
-One of the tools most commonly used for this purpose is Qualimap 2 [18]. The rationale behind is to assess the quality of the mapping of trimmed raw reads to virus reference genome which was performed to calculate the amount of viral reads present. The outputs can be verified in .PDF and .HTML formats. 
-INSTALLATION:
-http://qualimap.conesalab.org/ 
 
 SEARCH FOR VIRAL GENOME VARIANTS (VARIANT CALLING)
 Several tools are used to reveal genetic variants (SNPs and indels) present in the virus genome under study when compared to a viral reference genome. 
