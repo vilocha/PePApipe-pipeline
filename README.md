@@ -29,6 +29,7 @@ According to needs, the different modules in the pipeline can be activated/ deac
 
 The input or starting point of the pipeline is always the set of raw reads which are the outputs of the sequencing platform (short reads from Illumina, although long reads from Oxford Nanopore Technologies can also be used) organized in two files: .FASTQ R1, or forward reads, and .FASTQ R2, or reverse reads. The output files of the different steps are specified on the installation webpages.
 
+
 STEPS:
 
 QUALITY CONTROL OF READS
@@ -43,35 +44,44 @@ A further quality control using FastQC [4] can be performed for comparison purpo
 
 Installation: https://github.com/OpenGene/fastp 
 
+
 VIRAL READS CONTENT CHECK
 
 In this step the reads that passed the previous filters (‘clean reads’) are mapped against the virus reference genome in .FASTA format chosen for convenience in each particular case using the software tools BWA-mem2 [6] and Samtools [7]. 
 This step is probably the most important of all steps included in this part of the flow, and of the pipeline for that matter. The viral genome reference used for convenience by the authors of the pipeline was ASFV Georgia 2007/1 (Genbank assembly: GCA_003047755.2).
 The objective of this mapping is two-fold: on the one hand it allows to quantify the amount of reads within the original .FASTQ files actually mapping with an ASFV (and thus to also quantify the amount of reads not mapping with an ASFV), and on the other hand, to create a set of reference-mapped contigs (.BAM file) as a first step in the search of genetic variants (SNPs and indels) in the genome of our virus problem compared to the genome of the virus reference used.
-INSTALLATION:
-https://github.com/bwa-mem2/bwa-mem2
-https://www.htslib.org/download/ 
+
+Installation: https://github.com/bwa-mem2/bwa-mem2; https://www.htslib.org/download/ 
+
 
 QUALITY CHECK OF READS MAPPED TO REFERENCE GENOME
+
 One of the tools most commonly used for this purpose is Qualimap 2 [18]. The rationale behind is to assess the quality of the mapping of trimmed raw reads to virus reference genome which was performed to calculate the amount of viral reads present. The outputs can be verified in .PDF and .HTML formats. 
-INSTALLATION:
-http://qualimap.conesalab.org/ 
+
+Installation: http://qualimap.conesalab.org/ 
+
 
 QUANTITATIVE ASSESSMENT OF VIRAL READS (THEORETICAL CUT-OFF POINT: 75%)
+
 It is important to carry out all bioinformatics analyses only on viral reads free of contamination with reads from other origins (host, environment or handling personnel) or, if this is not possible, at least on a as high as possible number of viral reads. This is because the results we may obtain if the analyses are performed on a high number of non-viral reads may be spurious and therefore not representative of the virus we are trying to characterize.
 This is a point in the pipeline where a decision has to be made as to the quality level we want to apply to our analysis in relation to the available reads (Figure 1). A theoretical threshold (cut-off point) of 75% has been established by the authors in order to decide whether to continue the analyses with the original .FASTQ files already filtered (‘clean reads’) or whether to carry out yet another filtering step to get rid of non-viral reads. If the latter is decided, a new set of .FASTQ files must be created by mapping the ‘clean reads’ against all published reliable reads belonging to the Superkingdom Viruses (NCBI: txid10239).
 Apart from the methods used to isolate and characterize the viral DNA, the method used to prepare the libraries (with or without capture) is the single most influential step on the amount of foreign (non-viral) DNA found in our sample. If a non-capture library preparation method is used, there will be a high number of non-viral reads present in the .FASTQ files, thus these may be larger in size although not necessarily better in quality.
 Hence, this decision threshold is arbitrary and may vary depending on the initial .FASTQ files and whether the library has been prepared using capture or not. Libraries prepared without capture are likely to contain percentages of viral reads lower than 75%.      
 
+
 REMOVAL OF READS NOT BELONGING TO VIRUSES
+
 To carry out the removal of non-viral reads a loop with an additional Python script using the tool Kraken2 [8] is necessary. This extra step will create a new set of .FASTQ files containing only viral reads. 
 As already mentioned, this step can be performed whenever the chosen threshold of viral reads is not reached (in our case 75%) or it may also be systematically run every time, independently of the amount of non-viral reads present in the original ‘cleaned’ set of .FASTQ files. 
 If there is availability of a substantial amount of samples, a benchmark exercise can be carried out to refine the decision threshold or cut-off percentage point, making it lower or higher than 75% according to each specific situation.
-INSTALLATION:
-The programme used for this purpose is called Kraken2 [8] and the procedure consists of two steps: building of the virus database and extraction of the viral reads. Instructions about these procedures are detailed on this website:
-https://ccb.jhu.edu/software/krakentools/index.shtml?t=extractreads  
-CODE LINES:
-For this step purposely-built BASH scripts have been designed and will be available on https://www.protocols.io/ and https://github.com/.
+
+Installation:
+
+The programme used for this purpose is called Kraken2 [8] and the procedure consists of two steps: building of the virus database and extraction of the viral reads. Instructions about these procedures are detailed on this website: https://ccb.jhu.edu/software/krakentools/index.shtml?t=extractreads  
+
+Code lines:
+
+For this step, purposely-built BASH scripts have been designed and will be available on https://www.protocols.io/ and https://github.com/.
 
 DE NOVO VIRAL ASSEMBLY
 This step is mainly performed with the software tool Unicycler [9], and ultimately refined with the programmes RagTag [10] (using Unicycler outputs as inputs) and MeDuSa [11] (using RagTag outputs as inputs). 
