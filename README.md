@@ -178,7 +178,11 @@ B)
 The eigth files that can be downloaded and adapted to each particular case to successfully run PePApipe are thus:
 
 
-NB: If we want to run the pipeline locally, the running codes which are embedded within the bash scripts must be typed straigth into the terminal, by-passing the slurm loops.
+NB: If we want to run the pipeline locally, the running codes which are embedded within the bash scripts must be typed straigth into the terminal, by-passing the slurm loop. 
+
+In addition, please note that in the analysis working directory where we want to execute the pipeline there must be the eigth files mentioned above (two Python files, five bash scripts and a text file with the list of samples) and as many folders named with as many different samples we have. Inside each of the sample folders we must have the two reads corresponding to that sample, Forward and Reverse, either from Illumina (short reads) or Oxford Nanopore Technologies (long reads). There will be eight output folders (see Section of Expected Outputs below) which will be created within each of the sample folders.
+
+Finally, the two sets of genome references, which can be called 'virus_reference' (needed for bwa-mem2) and 'other_references' (needed for MeDuSa) must be located one hierarchy above of the directory where the sample folders and scripts are located, i.e., at the same level as our analysis working directory.   
 
 ## Expected Outputs
 
@@ -187,7 +191,7 @@ The pipeline produces all files necessary to interpret the results, classifying 
 All steps are amenable to user control by means of switching on/off the necessary sections in each particular case. There are several steps where the quality of the processes can be checked to make sure the progress of the results is in line with our expectations. 
 The pipeline can be easily adapted to viruses other than ASFV by changing the parameters relevant to the new virus and running the specific pipeline sections accordingly.
 
-The folders that are created along with the information retrievable for the interpretation of results are listed below:
+The eigth folders that are created when the pipeline has finished running along with the information retrievable for the interpretation of results are listed below:
 
 
 The most important outputs are the consensus sequence of the genome of the virus we are studying and the table of variants for that particular virus against the genome reference chosen in the first place. Secondary outputs are reference mapping parameters, de novo assembly parameters and quality assessment summaries. As already mentioned, the findings obtained may be further investigated using IGV and GATU.
