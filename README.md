@@ -77,11 +77,7 @@ If there is availability of a substantial amount of samples, a benchmark exercis
 
 Installation:
 
-The programme used for this purpose is called Kraken2 and the procedure consists of two steps: building of the virus database and extraction of the viral reads. Instructions about these procedures are detailed on this website: https://ccb.jhu.edu/software/krakentools/index.shtml?t=extractreads  
-
-Code lines:
-
-For this step, purposely-built BASH scripts have been designed and are downloadable through this webpage.
+The programme used for this purpose is called Kraken2 and the procedure consists of two steps: building of the virus database and extraction of the viral reads. Instructions about these procedures are detailed on this website: https://ccb.jhu.edu/software/krakentools/index.shtml?t=extractreads. For this step, purposely-built BASH scripts have been designed and are downloadable through this webpage.
 
 
 DE NOVO VIRAL ASSEMBLY
@@ -156,7 +152,7 @@ Installation: https://github.com/MultiQC/MultiQC
 
 ## Example Usage
 
-Once the installation of the tools is complete it has to be decided whether to analyse one sample or a batch of samples. The pipeline, as a python extension file, is then run using either the script for a single sample or the multisample script, both in bash. If we decide to analyse a batch of samples, a file.txt with the list of samples must also be provided. There are two additional scripts to be run, both in bash: one is the script for an overall analysis using MultiQC and the other is a script for extracting viral reads from the original .Fastq files to generate just viral .Fastq files. The latter script goes along its corresponding python extension file for extracting the viral reads.
+Once the installation of the tools is complete it has to be decided whether to analyse one sample or a batch of samples. The pipeline, as a python extension file, is then run using either the script for a single sample or the multisample script, both in bash. If we decide to analyse a batch of samples, a file.txt with the list of samples must also be provided. There are three additional scripts to be run, all three in bash: one is the script for an overall analysis using MultiQC and the other two are the script for building the Kraken2 database and the script for extracting the viral reads from the original .Fastq files to generate a new set of .Fastq files only containing viral reads. The latter script goes along a python extension file for extracting the viral reads.
 
 This pipeline was originally built and designed to be launched using a slurm protocol. The launching command is sbatch run_pipe_single and if we want to follow the execution on the screen the following command must be typed on the same terminal (do not open a new terminal): tail -F pipeline_log.txt. After typing this line, an immediate message will appear telling us that 'the pipeline_log.txt has not been found', but once the execution commences the message will be that 'the pipeline_log.txt was found' and from that moment we can start seeing the progress on the terminal screen.
 
