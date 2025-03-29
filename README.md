@@ -156,9 +156,36 @@ Installation: https://github.com/MultiQC/MultiQC
 
 ## Example Usage
 
+Once the installation of the tools is complete it has to be decided whether to analyse one sample or a batch of samples. The pipeline, as a python extension file, is then run using either the script for a single sample or the multisample script, both in bash. If we decide to analyse a batch of samples, a file.txt with the list of samples must also be provided. There are two additional scripts to be run, both in bash: one is the script for an overall analysis using MultiQC and the other is a script for extracting viral reads from the original .Fastq files to generate just viral .Fastq files. The latter script goes along its corresponding python extension file for extracting the viral reads.
+
+This pipeline was originally built and designed to be launched using a slurm protocol. The launching command is sbatch run_pipe_single and if we want to follow the execution on the screen the following command must be typed on the same terminal (do not open a new terminal): tail -F pipeline_log.txt. After typing this line, an immediate message will appear telling us that 'the pipeline_log.txt has not been found', but once the execution commences the message will be that 'the pipeline_log.txt was found' and from that moment we can start seeing the progress on the terminal screen.
+
+In summary, the number of files, their running codes and the orden of execution are listed below (all five files are downloadable from this webpage):
+
+1) Pipeline in python language PePApipe.py to be run on a single sample with bash script run_pipe_single
+
+Code lines in script run_pipe_single:
+
+unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution
+
+module load cesga/2020 gcccore/system gcc/system fastqc/0.12.1 fastp/0.20.1 openmpi/4.1.1_ft3 ragtag/2.1.0 samtools/1.9 varscan/2.3.9 quast/5.2.0 medusa/20240116 bedtools/2.31.0 unicycler/0.5.0 bwa-mem2/2.2.1 qualimap/2.3 multiqc/1.10.1 freebayes/1.3.7 bbmap/38.90 kraken2/2.1.2
+
+python -u ./PePApipe_test2.py -s F8 -o ./F8 -t 12 -r1 ./F8/*R1*fastq.gz -r2 ./F8/*R2*fastq.gz -R1 ../reference_dAB/mutante_dAB.fasta -R2 ../reference_pig/Sus_scrofa11.1_genomic_complete.fasta &> pipeline_log.txt
+
+2)  
+
+The four scripts
+
+NB: If we want to run the pipeline locally, the running codes which are embedded within the bash scripts must be typed straigth into the terminal, by-passing the slurm loops.
 
 ## Expected Outputs
 
+The pipeline produces all files necessary to interpret the results, classifying them into folders, in an approximate time which depends on the size of the .FASTQ files. The time used may span from 10 minutes with files of around 0.5 Mb through to 30 minutes with files of 1 Mb in size or to longer times if high capacity sequencers are used. Several intermediate files are also created in the process, which can be used as inputs for further or parallel analyses, as well as to check for possible errors during the analysis. Among these complementary post-analysis steps are viral annotation (GATU) or genome visualization (IGV).  
+
+All steps are amenable to user control by means of switching on/off the necessary sections in each particular case. There are several steps where the quality of the processes can be checked to make sure the progress of the results is in line with our expectations. 
+The pipeline can be easily adapted to viruses other than ASFV by changing the parameters relevant to the new virus and running the specific pipeline sections accordingly.
+
+The most important outputs are the consensus sequence of the genome of the virus we are studying and the table of variants for that particular virus against the genome reference chosen in the first place. Secondary outputs are reference mapping parameters, de novo assembly parameters and quality assessment summaries. As already mentioned, the findings obtained may be further investigated using IGV and GATU.
 
 ## License & Citation
 
