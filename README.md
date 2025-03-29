@@ -20,7 +20,7 @@ Starting from raw data (paired .FASTQ files) obtained from short-read sequencing
 PIPELINE DIAGRAM
 ![image](https://github.com/user-attachments/assets/f84b44a6-66a9-473c-9bd6-0ece897f9146)
 
-Figure 1. Overall bioinformatic analysis flow followed with PePApipe (in-house built python pipeline specifically designed for ASF viruses). 
+Figure 1. Overall bioinformatic analysis flow followed with PePApipe (in-house built Python pipeline specifically designed for ASF viruses). 
 
 ## Installation Steps
 The following steps must be implemented in the order suggested to successfully install all necessary programmes to be able to run this pipeline. The actual code lines used within the pipeline are clearly shown in the pipeline script itself, which can be downloaded from this page. These code lines are already built within the pipeline and will be executed at once when the pipeline is run.
@@ -152,15 +152,15 @@ Installation: https://github.com/MultiQC/MultiQC
 
 ## Example Usage
 
-Once the installation of the tools is complete it has to be decided whether to analyse one sample or a batch of samples. The pipeline, as a python extension file, is then run using either the script for a single sample or the multisample script, both in bash. If we decide to analyse a batch of samples, a file.txt with the list of samples must also be provided. There are three additional scripts to be run, all three in bash: one is the script for an overall analysis using MultiQC and the other two are the script for building the Kraken2 database and the script for extracting the viral reads from the original .Fastq files to generate a new set of .Fastq files only containing viral reads. The latter script goes along a python extension file for extracting the viral reads.
+Once the installation of the tools is complete it has to be decided whether to analyse one sample or a batch of samples. The pipeline (File 1), as a Python extension file, is then run using either the script for a single sample (File 2) or the multisample script (File 3), both in bash. If we decide to analyse a batch of samples, a file.txt with the list of samples (File 4) must also be provided. There are three additional scripts to be run, all three in bash: one is the script for an overall analysis using MultiQC (File 5) and the other two are the script for building the Kraken2 database (File 6) and the script for extracting the viral reads from the original .Fastq files to generate a new set of .Fastq files that only contain viral reads (File 7). The latter script goes along a Python extension file for extracting the viral reads (File 8).
 
-This pipeline was originally built and designed to be launched using a slurm protocol. The launching command is sbatch run_pipe_single and if we want to follow the execution on the screen the following command must be typed on the same terminal (do not open a new terminal): tail -F pipeline_log.txt. After typing this line, an immediate message will appear telling us that 'the pipeline_log.txt has not been found', but once the execution commences the message will be that 'the pipeline_log.txt was found' and from that moment we can start seeing the progress on the terminal screen.
+This pipeline was originally built and designed to be launched using a slurm protocol. The launching command is either 'sbatch run_pipe_single.sh' or 'sbatch run_pipe_batch.sh' and if we want to follow the execution on the screen the following command must be typed on the same terminal (do not open a new terminal for this): 'tail -F pipeline_log.txt'. After typing this line, an immediate message will appear telling us that "the pipeline_log.txt has not been found", but once the execution commences the message will be that "the pipeline_log.txt was found" and from that moment we can start seeing the progress on the terminal screen.
 
-In summary, the number of files, their running codes and the orden of execution are listed below (all five files are downloadable from this webpage):
+In summary, all files used, their running codes and the orden of execution are listed below:
 
-1) Pipeline in python language PePApipe.py to be run on a single sample with bash script run_pipe_single
+A) Pipeline in Python language PePApipe.py (File 1) to be run on a single sample with bash script 'run_pipe_single.sh' (File 2) or on multiple samples with bash script 'run_pipe_batch.sh' (File 3)
 
-Code lines in script run_pipe_single:
+Code lines in script 'run_pipe_single.sh':
 
 unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution
 
@@ -168,9 +168,14 @@ module load cesga/2020 gcccore/system gcc/system fastqc/0.12.1 fastp/0.20.1 open
 
 python -u ./PePApipe_test2.py -s F8 -o ./F8 -t 12 -r1 ./F8/*R1*fastq.gz -r2 ./F8/*R2*fastq.gz -R1 ../reference_dAB/mutante_dAB.fasta -R2 ../reference_pig/Sus_scrofa11.1_genomic_complete.fasta &> pipeline_log.txt
 
-2)  
+Code lines in script 'run_pipe_batch.sh':
 
-The four scripts
+
+
+B)  
+
+The eigth files that can be downloaded and adapted to each particular case to successfully run PePApipe are thus:
+
 
 NB: If we want to run the pipeline locally, the running codes which are embedded within the bash scripts must be typed straigth into the terminal, by-passing the slurm loops.
 
@@ -180,6 +185,9 @@ The pipeline produces all files necessary to interpret the results, classifying 
 
 All steps are amenable to user control by means of switching on/off the necessary sections in each particular case. There are several steps where the quality of the processes can be checked to make sure the progress of the results is in line with our expectations. 
 The pipeline can be easily adapted to viruses other than ASFV by changing the parameters relevant to the new virus and running the specific pipeline sections accordingly.
+
+The folders that are created along with the information retrievable for the interpretation of results are listed below:
+
 
 The most important outputs are the consensus sequence of the genome of the virus we are studying and the table of variants for that particular virus against the genome reference chosen in the first place. Secondary outputs are reference mapping parameters, de novo assembly parameters and quality assessment summaries. As already mentioned, the findings obtained may be further investigated using IGV and GATU.
 
