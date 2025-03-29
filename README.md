@@ -1,5 +1,5 @@
 # PePApipe-pipeline
-Complete bioinformatics analysis pipeline for African Swine Fever virus genomes  
+Complete bioinformatics analysis pipeline for African Swine Fever Virus (ASFV) genomes  
 
 ## Description
 Despite the existence of published generic tools designed to carry out bioinformatics analyses of genomes from different origins, the differences between the genomes may advice to use specifically designed 
