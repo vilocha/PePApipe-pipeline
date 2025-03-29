@@ -198,3 +198,17 @@ The most important outputs are the consensus sequence of the genome of the virus
 
 ## License & Citation
 
+LICENSE
+
+This pipeline is publicly licensed to be used under the GNU GENERAL PUBLIC LICENSE Version 3, 29th June 2007
+
+CITATION
+
+Once published the title and author list of this work will be as follow:
+
+Title:
+'PePApipe': a complete bioinformatics analysis pipeline for African Swine Fever Virus genomes
+
+Authors:
+Vicente Lopez Chavarrias 1, Irene Aldea Ramos 1, Jovita Fernandez Pinero 1 
+1.	Centro de Investigación en Sanidad Animal (CISA), Instituto Nacional de Investigación y Tecnología Agraria y Alimentaria (INIA), Consejo Superior de Investigaciones Científicas (CSIC), Valdeolmos, Madrid, Spain
