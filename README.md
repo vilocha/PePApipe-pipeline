@@ -183,19 +183,35 @@ while read -r line; do
 python -u ./PePApipe.py -s "$line" -o "./$line" -t 12 -r1 "./$line/*R1*fastq.gz" -r2 "./$line/*R2*fastq.gz" -R ../virus_reference/virus_reference.fasta &>> pipeline_log.txt
 done < ./samples.txt 
 
-B) Building of Kraken2 database with script 'run_krakenDB_build' (File7) 
+B) Building of Kraken2 database with script 'run_krakenDB_build' (File 7) 
 
+module load ... (branches, modules and versions to be loaded in each particular server)
+kraken2-build --threads $SLURM_CPUS_PER_TASK --download-taxonomy --db DB_Kraken2/
+kraken2-build --threads $SLURM_CPUS_PER_TASK --download-library viral --db DB_Kraken2/
+kraken2-build --build --db DB_Kraken2/
+kraken2 --db DB_Kraken2/ --gzip-compressed --paired E1-131222_S1_L001_R1_001.fastq.gz E1-131222_S1_L001_R2_001.fastq.gz --classified-out cseqs#.fq seqs_1.fq seqs_2.fq
+gzip seqs_1.fq
+gzip seqs_2.fq
 
+C) Python extension file 'extract_kraken_reads.py' (File 5) for extracting the viral reads using script 'run_extract_kraken_fqs' (File 6)     
 
-C) Python extension file 'extract_kraken_reads.py' for extracting the viral reads (File 5) using script 'run_extract_kraken_fqs' (File 6)     
+module load ... (branches, modules and versions to be loaded in each particular server)
 
-D) 
+python extract_kraken_reads.py -k E1_kraken -s1 E1-131222_S1_L001_R1_001.fastq.gz -s2 E1-131222_S1_L001_R1_001.fastq.gz -t 10239 -o New_R1.fq.gz -o2 New_R2.fq.gz &> pipeline_log.txt
 
-The eigth files that can be downloaded and adapted to each particular case to successfully run PePApipe are thus:
+D) Bash script 'run_multiqc' (File 8) to carry out overall analysis with MultiQC 
+
+unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution
+
+module load ... (branches, modules and versions to be loaded in each particular server)
+
+. multiqc
 
 NB: If we want to run the pipeline locally, the running codes which are embedded within the bash scripts must be typed straigth into the terminal, by-passing the slurm loop. 
 
-In addition, please note that in the analysis working directory where we want to execute the pipeline there must be the eigth files mentioned above (two Python files, five bash scripts and a text file with the list of samples) and as many folders named with as many different samples we have. Inside each of the sample folders we must have the two reads corresponding to that sample, Forward and Reverse, either from Illumina (short reads) or Oxford Nanopore Technologies (long reads). There will be eight output folders (see Section of Expected Outputs below) which will be created within each of the sample folders.
+In addition, please note that in the analysis working directory where we want to execute the pipeline there must be the eigth files mentioned above (two Python files, five bash scripts and a text file with the list of samples) and as many folders named with as many different samples we have. The eigth files are available on this webpage and can be downloaded and adapted to each particular case to successfully run 'PePApipe'. 
+
+Inside each of the sample folders we must have the two reads corresponding to that sample, Forward and Reverse, either from Illumina (short reads) or Oxford Nanopore Technologies (long reads). There will be eight output folders (see Section of Expected Outputs below) which will be created within each of the sample folders.
 
 Finally, the two sets of genome references, which can be called 'virus_reference' (needed for bwa-mem2) and 'other_references' (needed for MeDuSa) must be located one hierarchy above of the directory where the sample folders and scripts are located, i.e., at the same level as our analysis working directory. The references for MeDuSa can be used by the tool direct from .FASTA format files but the viral genome reference used by bwa-mem2 must be indexed first in order to be available for the tool with this command: bwa index virus_reference.fasta.    
 
@@ -208,8 +224,41 @@ The pipeline can be easily adapted to viruses other than ASFV by changing the pa
 
 The eigth folders that are created when the pipeline has finished running along with the information retrievable for the interpretation of results are listed below:
 
+FOLDER 1: A1_pre_trimming_quality
 
-The most important outputs are the consensus sequence of the genome of the virus we are studying and the table of variants for that particular virus against the genome reference chosen in the first place. Secondary outputs are reference mapping parameters, de novo assembly parameters and quality assessment summaries. As already mentioned, the findings obtained may be further investigated using IGV and GATU.
+Here we can find the results of the quality check where the .HTML files are most useful
+
+FOLDER 2: A2_trimming_and_post_trimming_quality
+
+Here we find a summary of the trimming as text file and some graphs from fastp in .PDF comparable to the .HTML files from FastQC in FOLDER 1 
+
+FOLDER 3: B_mapping_and_new_reads
+
+Here we can see a summary of the mapping with reference as text file 
+
+FOLDER 4: C1_denovo1_unicycler
+
+Here we can see a summary of the de novo assembly as text file and a .FASTA file with the resulting contigs
+
+FOLDER 5: C2_denovo2_ragtag
+
+Here we find also a summary of the improvement with RagTag as text file and a .FASTA file with the resulting contigs 
+
+FOLDER 6: C3_denovo3_medusa
+
+Here we find a text file with the final improvement performed by MeDuSa and the final .FASTA file, generally with a single contig which is the consensus sequence; if there are several contigs, the consensus sequence is the longest of these   
+
+FOLDER 7: C4_denovo_quality
+
+Here we find a summary of the de novo assembly as a text file and a .PDF with graphs
+
+FOLDER 8: D_variants
+
+Here we find the table with variants found (SNPs and insertions/deletions combined) as .VCF file 
+
+The most important outputs are the consensus sequence of the genome of the virus we are studying (FOLDER 6) and the table of variants for that particular virus against the genome reference chosen (FOLDER 8). Secondary outputs are reference mapping parameters, de novo assembly parameters and quality assessment summaries, as described above. As already mentioned, the findings obtained may be further investigated using IGV and GATU.
+
+ERRORS: To find out about any errors occurring during execution of the pipelines or any of the scripts there are two sources of information to investigate, the ERR files and the 'pipeline_log.txt' files (the latter are created at the launch of the python extension files)  
 
 ## License & Citation
 
