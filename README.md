@@ -153,13 +153,17 @@ Installation: https://github.com/MultiQC/MultiQC
 
 ## Example Usage
 
-Once the installation of the tools is complete it has to be decided whether to analyse one sample or a batch of samples. The pipeline (File 1), as a Python extension file, is then run using either the script for a single sample (File 2) or the multisample script (File 3), both in bash. If we decide to analyse a batch of samples, a file.txt with the list of samples (File 4) must also be provided. There are three additional scripts to be run, all three in bash: one is the script for an overall analysis using MultiQC (File 5) and the other two are the script for building the Kraken2 database (File 6) and the script for extracting the viral reads from the original .Fastq files to generate a new set of .Fastq files that only contain viral reads (File 7). The latter script goes along a Python extension file for extracting the viral reads (File 8).
+Once the installation of the tools is complete it has to be decided whether to analyse one sample or a batch of samples. The pipeline (File 1), as a Python extension file, is then run using either the script for a single sample (File 2) or the multisample script (File 3), both in bash. If we decide to analyse a batch of samples, a text file with the list of samples (File 4) must also be provided. 
 
-This pipeline was originally built and designed to be launched using a slurm protocol. The launching command is either 'sbatch run_pipe_single.sh' or 'sbatch run_pipe_batch.sh' and if we want to follow the execution on the screen the following command must be typed on the same terminal (do not open a new terminal for this): 'tail -F pipeline_log.txt'. After typing this line, an immediate message will appear telling us that "the pipeline_log.txt has not been found", but once the execution commences the message will be that "the pipeline_log.txt was found" and from that moment we can start seeing the progress on the terminal screen.
+If we opt for generating a new set of .FASTQ files that only contain viral reads, there is an additional Python extension file (File 5) which is launched with a script in bash (File 6), but first we must build the Kraken2 database with yet another script in bash (File 7).
+
+Finally, the last bash script is needed to carry out an overall analysis using MultiQC (File 8). 
+
+This pipeline was originally built and designed to be launched using a slurm protocol. The launching command is either 'sbatch run_pipe_single.sh' or 'sbatch run_pipe_batch.sh' and if we want to follow the execution on the screen the following command must be typed on the same terminal (do not open a new terminal for this): 'tail -F pipeline_log.txt'. After typing this line, an immediate message will appear telling us that "the pipeline_log.txt has not been found", but once the job enters a node and the execution commences the message will be that "the pipeline_log.txt was found" and from that moment we can start seeing the progress on the terminal screen.
 
 In summary, all files used, their running codes and the orden of execution are listed below:
 
-A) Pipeline in Python language PePApipe.py (File 1) to be run on a single sample with bash script 'run_pipe_single.sh' (File 2) or on multiple samples with bash script 'run_pipe_batch.sh' (File 3)
+A) Pipeline in Python language 'PePApipe.py' (File 1) to be run on a single sample with bash script 'run_pipe_single.sh' (File 2) or on multiple samples with bash script 'run_pipe_batch.sh' (File 3) in which case a 'samples.txt' file (File 4) must be provided
 
 Code lines in script 'run_pipe_single.sh':
 
@@ -179,10 +183,15 @@ while read -r line; do
 python -u ./PePApipe.py -s "$line" -o "./$line" -t 12 -r1 "./$line/*R1*fastq.gz" -r2 "./$line/*R2*fastq.gz" -R ../virus_reference/virus_reference.fasta &>> pipeline_log.txt
 done < ./samples.txt 
 
-B)  
+B) Building of Kraken2 database with script 'run_krakenDB_build' (File7) 
+
+
+
+C) Python extension file 'extract_kraken_reads.py' for extracting the viral reads (File 5) using script 'run_extract_kraken_fqs' (File 6)     
+
+D) 
 
 The eigth files that can be downloaded and adapted to each particular case to successfully run PePApipe are thus:
-
 
 NB: If we want to run the pipeline locally, the running codes which are embedded within the bash scripts must be typed straigth into the terminal, by-passing the slurm loop. 
 
