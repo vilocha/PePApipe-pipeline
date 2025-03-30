@@ -222,7 +222,7 @@ The pipeline produces all files necessary to interpret the results, classifying 
 All steps are amenable to user control by means of switching on/off the necessary sections in each particular case. There are several steps where the quality of the processes can be checked to make sure the progress of the results is in line with our expectations. 
 The pipeline can be easily adapted to viruses other than ASFV by changing the parameters relevant to the new virus and running the specific pipeline sections accordingly.
 
-The eigth folders that are created when the pipeline has finished running along with the information retrievable for the interpretation of results are listed below:
+The eigth folders that are created when the pipeline has finished running along with the information retrievable for interpretation of results are listed below:
 
 FOLDER 1: A1_pre_trimming_quality
 
