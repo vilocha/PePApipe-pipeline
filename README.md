@@ -185,6 +185,7 @@ done < ./samples.txt
 
 B) Building of Kraken2 database with script 'run_krakenDB_build' (File 7) 
 
+Code lines:
 module load ... (branches, modules and versions to be loaded in each particular server)
 kraken2-build --threads $SLURM_CPUS_PER_TASK --download-taxonomy --db DB_Kraken2/
 kraken2-build --threads $SLURM_CPUS_PER_TASK --download-library viral --db DB_Kraken2/
@@ -195,12 +196,14 @@ gzip seqs_2.fq
 
 C) Python extension file 'extract_kraken_reads.py' (File 5) for extracting the viral reads using script 'run_extract_kraken_fqs' (File 6)     
 
+Code lines:
 module load ... (branches, modules and versions to be loaded in each particular server)
 
 python extract_kraken_reads.py -k E1_kraken -s1 E1-131222_S1_L001_R1_001.fastq.gz -s2 E1-131222_S1_L001_R1_001.fastq.gz -t 10239 -o New_R1.fq.gz -o2 New_R2.fq.gz &> pipeline_log.txt
 
 D) Bash script 'run_multiqc' (File 8) to carry out overall analysis with MultiQC 
 
+Code lines:
 unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution
 
 module load ... (branches, modules and versions to be loaded in each particular server)
@@ -258,7 +261,7 @@ Here we find the table with variants found (SNPs and insertions/deletions combin
 
 The most important outputs are the consensus sequence of the genome of the virus we are studying (FOLDER 6) and the table of variants for that particular virus against the genome reference chosen (FOLDER 8). Secondary outputs are reference mapping parameters, de novo assembly parameters and quality assessment summaries, as described above. As already mentioned, the findings obtained may be further investigated using IGV and GATU.
 
-ERRORS: To find out about any errors occurring during execution of the pipelines or any of the scripts there are two sources of information to investigate, the ERR files and the 'pipeline_log.txt' files (the latter are created at the launch of the python extension files)  
+ATTENTION! ERRORS: To find out about any errors occurring during execution of the pipelines or any of the scripts there are two sources of information to investigate, the ERR files and the 'pipeline_log.txt' files (the latter are created at the launch of the python extension files)  
 
 ## License & Citation
 
