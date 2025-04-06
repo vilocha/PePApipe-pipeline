@@ -165,7 +165,7 @@ In summary, all files used, their running codes and the orden of execution are l
 
 A) Pipeline in Python language 'PePApipe.py' (File 1) to be run on a single sample with bash script 'run_pipe_single.sh' (File 2) or on multiple samples with bash script 'run_pipe_batch.sh' (File 3) in which case a 'samples.txt' file (File 4) must be provided
 
-Code lines in script 'run_pipe_single.sh':
+A.1. Code lines in script 'run_pipe_single.sh':
 
 `unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution'`
 
@@ -175,7 +175,7 @@ Code lines in script 'run_pipe_single.sh':
 
 Once the pipeline finishes, running the message `THANK YOU FOR USING 'PePApipe'!!` will appear on the screen, and `Ctrl + D` will return us to terminal control.
 
-Code lines in script 'run_pipe_batch.sh':
+A.2. Code lines in script 'run_pipe_batch.sh':
 
 `unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution`
 
