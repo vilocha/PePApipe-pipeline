@@ -173,7 +173,7 @@ Code lines in script 'run_pipe_single.sh':
 
 `python -u ./PePApipe.py -s SAMPLE -o ./SAMPLE -t 12 -r1 ./SAMPLE/*R1*fastq.gz -r2 ./SAMPLE/*R2*fastq.gz -R ../virus_reference/virus_reference.fasta &> pipeline_log.txt`
 
-Once the pipeline finishes running the message `THANK YOU FOR USING 'PePApipe'!!` will appear on the screen, and `Ctrl + D` will return us to terminal control.
+Once the pipeline finishes, running the message `THANK YOU FOR USING 'PePApipe'!!` will appear on the screen, and `Ctrl + D` will return us to terminal control.
 
 Code lines in script 'run_pipe_batch.sh':
 
@@ -185,7 +185,7 @@ Code lines in script 'run_pipe_batch.sh':
 python -u ./PePApipe.py -s "$line" -o "./$line" -t 12 -r1 "./$line/*R1*fastq.gz" -r2 "./$line/*R2*fastq.gz" -R ../virus_reference/virus_reference.fasta &>> pipeline_log.txt
 done < ./samples.txt` 
 
-Once the pipeline for each sample finishes running the message `THANK YOU FOR USING 'PePApipe'!!` will appear on the screen. Once we are sure all samples have been processed, pressing `Ctrl + D` will return us to terminal control.
+Once the pipeline for each sample finishes, running the message `THANK YOU FOR USING 'PePApipe'!!` will appear on the screen. Once we are sure all samples have been processed, pressing `Ctrl + D` will return us to terminal control.
 
 B) Building of Kraken2 database with script 'run_krakenDB_build' (File 7) 
 
