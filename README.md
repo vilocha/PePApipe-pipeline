@@ -169,30 +169,30 @@ Code lines in script 'run_pipe_single.sh':
 
 `unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution'`
 
-module load ... (branches, modules and versions to be loaded in each particular server)
+`module load ... (branches, modules and versions to be loaded in each particular server)`
 
-python -u ./PePApipe.py -s SAMPLE -o ./SAMPLE -t 12 -r1 ./SAMPLE/*R1*fastq.gz -r2 ./SAMPLE/*R2*fastq.gz -R ../virus_reference/virus_reference.fasta &> pipeline_log.txt
+`python -u ./PePApipe.py -s SAMPLE -o ./SAMPLE -t 12 -r1 ./SAMPLE/*R1*fastq.gz -r2 ./SAMPLE/*R2*fastq.gz -R ../virus_reference/virus_reference.fasta &> pipeline_log.txt`
 
 Code lines in script 'run_pipe_batch.sh':
 
-unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution
+`unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution`
 
-module load ... (branches, modules and versions to be loaded in each particular server)
+`module load ... (branches, modules and versions to be loaded in each particular server)`
 
-while read -r line; do
+`while read -r line; do
 python -u ./PePApipe.py -s "$line" -o "./$line" -t 12 -r1 "./$line/*R1*fastq.gz" -r2 "./$line/*R2*fastq.gz" -R ../virus_reference/virus_reference.fasta &>> pipeline_log.txt
-done < ./samples.txt 
+done < ./samples.txt` 
 
 B) Building of Kraken2 database with script 'run_krakenDB_build' (File 7) 
 
 Code lines:
-module load ... (branches, modules and versions to be loaded in each particular server)
+`module load ... (branches, modules and versions to be loaded in each particular server)
 kraken2-build --threads $SLURM_CPUS_PER_TASK --download-taxonomy --db DB_Kraken2/
 kraken2-build --threads $SLURM_CPUS_PER_TASK --download-library viral --db DB_Kraken2/
 kraken2-build --build --db DB_Kraken2/
 kraken2 --db DB_Kraken2/ --gzip-compressed --paired E1-131222_S1_L001_R1_001.fastq.gz E1-131222_S1_L001_R2_001.fastq.gz --classified-out cseqs#.fq seqs_1.fq seqs_2.fq
 gzip seqs_1.fq
-gzip seqs_2.fq
+gzip seqs_2.fq`
 
 C) Python extension file 'extract_kraken_reads.py' (File 5) for extracting the viral reads using script 'run_extract_kraken_fqs' (File 6)     
 
