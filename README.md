@@ -223,7 +223,7 @@ In addition, please note that in the analysis working directory where we want to
 
 Inside each of the sample folders we must have the two reads corresponding to that sample, Forward and Reverse, either from Illumina (short reads) or Oxford Nanopore Technologies (long reads). There will be eight output folders (see Section of Expected Outputs below) which will be created within each of the sample folders.
 
-Finally, the two sets of genome references, which can be called 'virus_reference' (needed for bwa-mem2) and 'other_references' (needed for MeDuSa) must be located one hierarchy above of the directory where the sample folders and scripts are located, i.e., at the same level as our analysis working directory. The references for MeDuSa can be used by the tool direct from .FASTA format files but the viral genome reference used by bwa-mem2 must be indexed first in order to be available for the tool with this command: bwa index virus_reference.fasta.    
+Finally, the two sets of genome references, which can be called 'virus_reference' (needed for bwa-mem2) and 'other_references' (needed for MeDuSa) must be located one hierarchy above of the directory where the sample folders and scripts are located, i.e., at the same level as our analysis working directory. The references for MeDuSa can be used by the tool direct from .FASTA format files but the viral genome reference used by bwa-mem2 must be indexed first in order to be available for the tool with this command: `bwa index virus_reference.fasta`.    
 
 ## Expected Outputs
 
