@@ -167,7 +167,7 @@ A) Pipeline in Python language 'PePApipe.py' (File 1) to be run on a single samp
 
 Code lines in script 'run_pipe_single.sh':
 
-'unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution'
+``unset DISPLAY   #This command is necessary to avoid any files from any of the tools from opening during execution of the pipeline, which will abort the pipeline execution'``
 
 module load ... (branches, modules and versions to be loaded in each particular server)
 
