@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="assets/PePApipe_logo.png" alt="Pipeline Logo" width="300"/>
+</p>
+
+
 # PePApipe-pipeline
 Complete bioinformatics analysis pipeline for African Swine Fever Virus (ASFV) genomes  
 
