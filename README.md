@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/PePApipe_logo.png" alt="Pipeline Logo" width="300"/>
+  <img src="assets/PePApipe_logo.jpg" alt="Pipeline Logo" width="300"/>
 </p>
 
 
