@@ -12,15 +12,15 @@ tools, especially in the case of viruses, such as the African Swine Fever Virus 
 
 The problem with viruses in general, and with the ASFV in particular, is that their genome is prone to change, and this variability in nature is typically a consequence of its replication in vivo when it infects host cells (domestic pigs and wild boars). With a genome of variable size between 170 to 194 kbp, ASFV is able to exchange large parts of its DNA with itself or with variants of the same virus in the cell environment of the host, with the resulting consequence of producing new genomes. Genome variations can be simply point mutations or small indels (insertions and deletions) occurring not very frequently, but nevertheless altering the original genomes, or these changes can be large indels leading to gene rearrangement, and homologous recombinations could occur as well. An additional peculiarity of ASFV genomes is that both left and right terminus regions of its DNA are very variable compared to the central section; moreover, these end regions contain inverted terminal repeats which further complicate both the assembly and annotation of the genomes at the analysis stage. 
 
-Although several tools exist than can be used to perform assembly and analysis of DNA genomes of viruses, such as ASFV, the authors of this work have not found to date a single tool able to compile all steps involved in this analysis in a complete, simple and accessible way. ‘PePApipe’ is fit for this purpose, and implements the work in a rapid, complete, efficient and clear manner. 
+Although several tools exist than can be used to perform assembly and analysis of DNA genomes of viruses, such as ASFV, the authors of this work have not found to date a tool able to compile all steps involved in this analysis in a simple and accessible way. ‘PePApipe’ is fit for this purpose, and implements the work in a rapid, complete, efficient and clear manner. 
 
-This pipeline has been developed bearing in mind that end-users are mostly laboratory people with limited bioinformatics skills.
+This pipeline has been developed bearing in mind that end-users are mostly laboratory professionals with limited bioinformatics skills.
 
 
 ## Pipeline Workflow (Diagram)
-This pipeline, designed and programmed in Python, can be run using basic Linux commands to launch a Bash script with a Slurm protocol and can be executed on multi-sample batches. The work is sequentially performed over three main areas of genomic analysis: quality control and pre-processing of raw reads, denovo genome assembly and multiple variant calling (Figure 1). Moreover, it may be run in a locally or remotely by accessing a computing server. A basic knowledge of Linux programming language is necessary both to install the programmes and to run the pipeline.
+This pipeline, designed and programmed in Python, can be run using basic Linux commands to launch a Bash script with a Slurm protocol and can be executed on multi-sample batches. The work is sequentially performed over three main areas of genomic analysis: quality control and pre-processing of raw reads, de novo genome assembly and variant calling (Figure 1). Moreover, it may be run in a local machine or remotely by accessing a computing server. A basic knowledge of Linux programming language is necessary both to install the programmes and to run the pipeline.
 
-Starting from raw data (paired .FASTQ files) obtained from short-read sequencing platforms (Illumina), ‘PePApipe’ implements in a sequential manner all crucial steps by using 14 software tools adequately built into a single pipeline.
+Starting from raw data (paired .FASTQ files) obtained from short-read sequencing platforms (Illumina), ‘PePApipe’ implements in a sequential manner all crucial steps by using 13 software tools adequately built into a single pipeline.
 
 PIPELINE DIAGRAM
 ![image](https://github.com/user-attachments/assets/f84b44a6-66a9-473c-9bd6-0ece897f9146)
