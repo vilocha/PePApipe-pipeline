@@ -28,24 +28,23 @@ PIPELINE DIAGRAM
 Figure 1. Overall bioinformatic analysis flow followed with PePApipe (in-house built Python pipeline specifically designed for ASF viruses). 
 
 ## Installation Steps
-The following steps must be implemented in the order suggested to successfully install all necessary programmes to be able to run this pipeline. The actual code lines used within the pipeline are clearly shown in the pipeline script itself, which can be downloaded from this page. These code lines are already built within the pipeline and will be executed at once when the pipeline is run.
+The following steps must be implemented in the suggested order to successfully install all necessary programmes and be able to run this pipeline. The actual code lines used within the pipeline are clearly shown in the pipeline script itself, which can be downloaded from this page. These code lines are already built within the pipeline and will be executed at once when the pipeline is run.
 
-According to needs, the different modules in the pipeline can be activated/ deactivated by just uncommenting/ commenting them in the main section of the pipeline script, respectively.
+The headers in the bash scripts specify the computation resources needed in the computer or server to allow the execution of the pipeline and its accessories. According to needs, the different modules in the pipeline can be activated/ deactivated by just uncommenting/ commenting them in the main section of the pipeline script, respectively.
 
-The input or starting point of the pipeline is always the set of raw reads which are the outputs of the sequencing platform (short reads from Illumina, although long reads from Oxford Nanopore Technologies can also be used) organized in two files: .FASTQ R1, or forward reads, and .FASTQ R2, or reverse reads. The output files of the different steps are specified on the installation webpages.
+The input or starting point of the pipeline is always the set of raw reads which are the outputs of the sequencing platform (short reads from Illumina, although long reads from Oxford Nanopore Technologies can also be used) organized in two files: .FASTQ_R1, or forward reads, and .FASTQ_R2, or reverse reads. This is the standard output of pair-end sequencing protocols, which are common when working with Illumina protocols. The output files of the different steps are specified further below.
 
 
 STEPS:
 
 QUALITY CONTROL OF READS
 
-This is the very first step which is necessary to ensure a good quality of the two .FASTQ files provided by the sequencing platform. The quality check of raw reads is carried out with the tool FastQC. As a general rule, the per-base sequence quality (Phred score) should always be ideally over 28, and under any circumstances it should be below 20.
+This is the very first step which is necessary to ensure a good quality of the .FASTQ files provided by the sequencing platform. The quality check of raw reads is carried out with the tool FastQC. As a general rule, the per-base sequence quality (Phred score) should always be ideally over 28, and it is recommended not to drop it below 20.
 
 Installation: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 
-Once the quality control step is complete and one is satisfied that the quality of sequences is adequate to continue the processing, the reads are ‘cleaned’ with the tool fastp. This step is necessary to ensure that adapters, low quality reads and duplicate reads are removed off the .FASTQ files. In addition, fast produces a post-trimming quality analysis report. 
-The adapters were included during the sequencing process but are not needed for the bioinformatics analysis. Only reads with a minimum phred quality score of 20 and a minimum length of 15 base pairs are kept after applying fastp, but these parameters can be changed in the code line according to user needs. 
-A further quality control using FastQC can be performed for comparison purposes although this is not necessary because fastp already provides a post-trimming quality report, as mentioned above.
+Once the quality control step is complete and one is satisfied that the quality of sequences is adequate to continue the processing, the reads are ‘cleaned’ with the tool fastp. This step is necessary to ensure that adapters and low quality and duplicate reads are removed off the .FASTQ files. In addition, fastp produces a post-trimming quality analysis report, making it unnecessary to perform a further stand-alone quality control with FastQC. 
+Only reads with a minimum Phred quality score of 20 (the default fastp Phred quality score is 15) and a minimum length of 15 base pairs (default parameter) are kept after applying fastp, but these parameters can be changed in the code line according to user needs. Depending on the number of reads available, these parameters can be changed up or down with the aim of maximizing output and minimizing low quality reads.
 
 Installation: https://github.com/OpenGene/fastp 
 
