@@ -234,7 +234,7 @@ Finally, the two sets of genome references, which can be called 'virus_reference
 
 ## Expected Outputs
 
-The pipeline produces all files necessary to interpret the results, classifying them into folders, in an approximate time which depends on the size of the .FASTQ files. The time used may span from 10 minutes with files of around 0.5 Mb through to 30 minutes with files of 1 Mb in size or to longer times if high capacity sequencers are used. Several intermediate files are also created in the process, which can be used as inputs for further or parallel analyses, as well as to check for possible errors during the analysis. Among these complementary post-analysis steps are viral annotation (GATU) or genome visualization (IGV).  
+The pipeline produces all files necessary to interpret the results, classifying them into folders, in an approximate time which depends on the size of the .FASTQ files. The time used may span from 10 minutes with files of around 0.5 Mb through to 30 minutes with files of 1 Mb in size or to longer times if high capacity sequencers are used. Several intermediate files are also created in the process, which can be used as inputs for further or parallel analyses, as well as to check for possible errors during the analysis. Among these complementary post-analysis steps are viral annotation with GATU (https://4virology.net/virology-ca-tools/gatu/) or genome visualization with IGV (https://igv.org/).  
 
 All steps are amenable to user control by means of switching on/off the necessary sections in each particular case. There are several steps where the quality of the processes can be checked to make sure the progress of the results is in line with our expectations. 
 The pipeline can be easily adapted to viruses other than ASFV by changing the parameters relevant to the new virus and running the specific pipeline sections accordingly.
@@ -273,9 +273,9 @@ FOLDER 8: D_variants
 
 Here we find the table with variants found (SNPs and insertions/deletions combined) as .VCF file 
 
-The most important outputs are the consensus sequence of the genome of the virus we are studying (FOLDER 6) and the table of variants for that particular virus against the genome reference chosen (FOLDER 8). Secondary outputs are reference mapping parameters, de novo assembly parameters and quality assessment summaries, as described above. As already mentioned, the findings obtained may be further investigated using IGV and GATU.
+The most important outputs are the consensus sequence of the genome of the virus we are studying (FOLDER 6) and the table of variants for that particular virus against the genome reference chosen (FOLDER 8). Secondary outputs are reference mapping parameters, de novo assembly parameters and quality assessment summaries.
 
-ATTENTION! ERRORS: To find out about any errors occurring during execution of the pipelines or any of the scripts there are two sources of information to investigate, the ERR files and the 'pipeline_log.txt' files (the latter are created at the launch of the python extension files)  
+ATTENTION! ERRORS: To find out about any errors occurring during the execution of the pipelines or any of the scripts there are two sources of information to investigate, the ERR files and the 'pipeline_log.txt' files (the latter are created at the launch of the python extension files)  
 
 ## License & Citation
 
