@@ -99,8 +99,18 @@ It is important to note that, even though a viral reference is used, not a singl
 
 Installation: https://github.com/malonge/RagTag
 
-After the correction and scaffolding performed by RagTag, a third tool called MeDuSa is incorporated as part of the de novo assembly process. MeDuSa performs a scaffold correction in a similar way to RagTag, but instead of using only one viral reference it uses as many well curated references as we are able to provide. Up to 10 references belonging to ASFV virus Genotype II have been included in this pipeline, which in alphabetical order are: Arm_07_CBM_c2_LR812933.1, ASFV_Georgia_2007_1_FR682468.2.fasta, ASFV_HU_2018_MN715134.1, ASFV_LT14_1490_MK628478.fasta, Belgium_2018_1_LR536725.1, Estonia_2014_LS478113.1, Korea_YC1_2019_ON075797.1, POL_2015_Podlaskie_MH681419.1, Tanzania_Rukwa_2017_1_LR813622.1 and Ulyanovsk_19_WB_5699_MW306192.1  
-The higher the number of references used, the better the result of this step will be, always making sure the references are akin to the ASFV Genotype we are studying. Briefly, the contigs obtained from the previous step are further assembled into larger scaffolds with MeDuSa. If the quality of the original reads is high this step generally results in one final contig, which is the putative consensus sequence of the virus under study. On the contrary, poor quality sequences may result in a large number of contigs, and if the number of contigs exceeds 3-5 it would be advisable to reject those sequences.
+After the correction and scaffolding performed by RagTag, a third tool called MeDuSa is incorporated as part of the de novo assembly process. MeDuSa performs a scaffold correction in a similar way to RagTag, but instead of using only one viral reference it uses as many well curated references as we are able to provide. Up to 10 references belonging to ASFV virus genotype II have been included in this pipeline, which in alphabetical order are:
+Arm_07_CBM_c2_LR812933.1
+ASFV_Georgia_2007_1_FR682468.2.fasta
+ASFV_HU_2018_MN715134.1
+ASFV_LT14_1490_MK628478.fasta
+Belgium_2018_1_LR536725.1
+Estonia_2014_LS478113.1
+Korea_YC1_2019_ON075797.1
+POL_2015_Podlaskie_MH681419.1
+Tanzania_Rukwa_2017_1_LR813622.1
+Ulyanovsk_19_WB_5699_MW306192.1  
+The higher the number of references used, the better the result of this step will be. Briefly, the contigs obtained from the previous step are further assembled into larger scaffolds with MeDuSa. If the quality of the original reads is high this step generally results in one final contig, which is the putative consensus sequence of the virus under study. On the contrary, poor quality sequences may result in a large number of contigs, and if the number of contigs exceeds 3-5 it would be advisable to reject those sequences.
 
 Installation: https://github.com/combogenomics/medusa 
 
@@ -110,22 +120,6 @@ QUALITY ASSESSMENT OF THE DE NOVO ASSEMBLY
 This is a quality analysis that can be performed over all steps in the de novo assembly loop with the intention of investigating the overall quality of the process. The tool included in the pipeline for this task is Quast (QUality ASsessment Tool) and the outputs are available on different formats: .TXT, .PDF, .TSV, .HTML, etc.
 
 Installation: https://github.com/ablab/quast 
-
-
-ANNOTATION OF THE CONSENSUS SEQUENCE WITH REFERENCE GENOME OF CHOICE
-
-This is not an essential step in the pipeline but rather a complementary analysis that can be carried out alongside with it. The annotation of the de novo consensus sequence is an important task to identify and tag the different genes which have been assembled together. The best tool released so far for this purpose is a universal tool for general annotation that works with viruses, called GATU (General Annotation Transfer Utility), although many viral genes remain unannotated after its use. Two files are necessary to carry out the annotation: a reference sequence in .GBK format and the problem sequence in .FASTA or .GBK formats. 
-The ASFV poses a problem that may render the use of this tool inappropriate, and that is the high genome variability of these viruses. Because of this, a full manual curation exercise is always necessary to arrange the genes according to references in a left to right terminus direction (5’ end to 3’ end) and to clean off all hypothetical genes whose probabilities of belonging to our virus problem are very low (the so called ‘false predictions’). The output of GATU is on a .TSV format and this can be easily transformed into Excel files.    
-
-Installation: https://4virology.net/virology-ca-tools/gatu/ 
-
-
-VISUALIZATION OF MAPPED READS AGAINST VIRUS REFERENCE GENOME OF CHOICE
-
-This is also an optional step that is not an integral part of the pipeline. The software tool most universally used for visualizing genome mappings is IGV (Integrative Genomics Viewer). 
-Two genomes are necessary to feed the tool: a reference genome in .FASTA format and the genome under study, which is always provided as a .BAM file accompanied by its index (.BAI file).   
-
-Installation: https://igv.org/ 
 
 
 SEARCH FOR VIRAL GENOME VARIANTS (VARIANT CALLING)
