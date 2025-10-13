@@ -141,20 +141,19 @@ In general, there are two main types of tools: those that use a Bayesian inferen
 In order to obtain the most plausible record of variants with this tool the following five parameters have been defined with the specified values:
 
 -	Minimum number of reads with change to call a variant: 5
--	Minimum depth (coverage=number of reads in total supporting that variant): 20
+-	Minimum depth (coverage=total number of reads supporting that variant): 20
 -	P-value: 0.001
 -	Minimum average quality: 30
--	Minimum variant frequency in that position: 0.5
--	Ploidy: 1 (haploid)
+-	Minimum variant frequency in that position: 0.05 (to account for true minority variants)
 
-This tool may be complemented with other tools in order to obtain more robust/reliable results. We complemented VarScan 2 with Qiagen CLC Genomics Workbench (https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-clc-genomics-workbench/). 
+We used a tool for variant calling provided by Qiagen CLC Genomics Workbench (https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-clc-genomics-workbench/) to compare the variant calling results obtained with VarScan 2 to ensure that the latter performs adequately. 
 
 Installation: https://varscan.sourceforge.net/ 
 
 
 OVERALL QUALITY ASSESSMENT OF THE ANALYSIS
 
-We performed an overall quality assessment of the analysis using the tool MultiQC. This tool evaluates all inputs and outputs in the working directory and performs a general summary assessment in the same folder where all folders used in the analysis are located.  
+In order to perform an overall assessment of the analysis, the tool MultiQC may be used. This tool evaluates all inputs and outputs in the working directory and performs a general quality summary assessment, which is based on the quality of the inputs (.FASTQ files) and on the type of programmes used. This tool must be executed in the working directory where all folders used during the running of the pipeline are located. This final step is valuable if we want to perform benchmark exercises to compare different inputs or different tools or both.  
 
 Installation: https://github.com/MultiQC/MultiQC
 
@@ -167,7 +166,7 @@ If we opt for generating a new set of .FASTQ files that only contain viral reads
 
 Finally, the last bash script is needed to carry out an overall analysis using MultiQC (File 8). 
 
-This pipeline was originally built and designed to be launched using a slurm protocol. The launching command is either 'sbatch run_pipe_single.sh' or 'sbatch run_pipe_batch.sh' and if we want to follow the execution on the screen the following command must be typed on the same terminal (do not open a new terminal for this): `tail -F pipeline_log.txt`. After typing this line, an immediate message will appear telling us that "the pipeline_log.txt has not been found", but once the job enters a node and the execution commences the message will be that "the pipeline_log.txt was found" and from that moment we can start seeing the progress on the terminal screen.
+This pipeline was originally built and designed to be launched using a slurm protocol. The launching command is either 'sbatch run_pipe_single.sh' (for one sample) or 'sbatch run_pipe_batch.sh' (for a batch of samples). If we want to follow the execution on the screen, the following command must be typed on the same terminal (do not open a new terminal for this): `tail -F pipeline_log.txt`. After typing this line, an immediate message will appear telling us that "the pipeline_log.txt has not been found", but once the job enters a node and the execution commences the message will be that "the pipeline_log.txt was found" and from that moment we can start seeing the progress of the execution on the terminal screen.
 
 In summary, all files used, their running codes and the orden of execution are listed below:
 
