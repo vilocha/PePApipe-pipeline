@@ -288,7 +288,7 @@ CITATION
 Once published the title and author list of this work will be as follow:
 
 Title:
-'PePApipe': a complete bioinformatics analysis pipeline for African Swine Fever Virus genomes
+'PePApipe': a complete bioinformatics analysis pipeline for African Swine Fever Virus genome
 
 Authors:
 Vicente Lopez Chavarrias 1, Irene Aldea Ramos 1, Jovita Fernandez Pinero 1 
