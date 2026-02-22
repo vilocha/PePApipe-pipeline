@@ -3,7 +3,7 @@
 </p>
 
 
-# PePApipe-pipeline
+# PePApipe
 Complete bioinformatics analysis pipeline for African Swine Fever Virus (ASFV) genome  
 
 ## Description
